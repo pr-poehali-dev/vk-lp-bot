@@ -1,0 +1,34 @@
+{
+  "tests": [
+    {
+      "name": "Подтверждение сервера ВК",
+      "method": "POST",
+      "path": "/",
+      "body": {"type": "confirmation", "group_id": 12345},
+      "expectedStatus": 200
+    },
+    {
+      "name": "Событие message_new (без токена)",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "type": "message_new",
+        "group_id": 12345,
+        "object": {
+          "message": {
+            "text": "/кик @user",
+            "from_id": 111,
+            "peer_id": 2000000001
+          }
+        }
+      },
+      "expectedStatus": 200
+    },
+    {
+      "name": "OPTIONS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    }
+  ]
+}

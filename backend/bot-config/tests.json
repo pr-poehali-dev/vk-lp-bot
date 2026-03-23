@@ -1,0 +1,34 @@
+{
+  "tests": [
+    {
+      "name": "Получить конфиг бота",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {"token_set": false},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Список модераторов",
+      "method": "GET",
+      "path": "/?action=moderators",
+      "expectedStatus": 200,
+      "expectedBody": {"moderators": []},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Получить логи",
+      "method": "GET",
+      "path": "/?action=logs",
+      "expectedStatus": 200,
+      "expectedBody": {"logs": []},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "OPTIONS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    }
+  ]
+}
