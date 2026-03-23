@@ -224,9 +224,12 @@ def handler(event: dict, context) -> dict:
 
     body = event.get("body", "")
     if not body:
-        return {"statusCode": 400, "headers": CORS_HEADERS, "body": json.dumps({"error": "no body"})}
+        return {"statusCode": 200, "headers": CORS_HEADERS, "body": "ok"}
 
-    data = json.loads(body)
+    try:
+        data = json.loads(body)
+    except Exception:
+        return {"statusCode": 200, "headers": CORS_HEADERS, "body": "ok"}
 
     # Подтверждение сервера ВК
     if data.get("type") == "confirmation":
@@ -234,6 +237,9 @@ def handler(event: dict, context) -> dict:
         return {"statusCode": 200, "headers": CORS_HEADERS, "body": confirmation}
 
     if data.get("type") == "message_new":
-        process_message(data)
+        try:
+            process_message(data)
+        except Exception:
+            pass
 
     return {"statusCode": 200, "headers": CORS_HEADERS, "body": "ok"}
